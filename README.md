@@ -37,10 +37,19 @@
   - TensorFlow and Keras
   - ANN, CNN, RNN, LSTM, GRU, Transformers
   - Transfer Learning
-- Aditional Skills
+- Other Skills
   - Dockers
   - Git, Github and Github Actions
-
+ 
+## Soft Skills
+- Focus
+- Emotional Stability
+- Self Awareness
+- Stress Management
+- Problem Solving
+- Empathy
+- Observation and Learning
+- Creative and Critical Thinking
     
 ## Education						       		
 - B.S Software Engineering	| The University of Modern Languages (NUML), Islamabad (_September 2026_)	 			        		

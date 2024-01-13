@@ -37,6 +37,10 @@
   - TensorFlow and Keras
   - ANN, CNN, RNN, LSTM, GRU, Transformers
   - Transfer Learning
+- Aditional Skills
+  - Dockers
+  - Git, Github and Github Actions
+
     
 ## Education						       		
 - B.S Software Engineering	| The University of Modern Languages (NUML), Islamabad (_September 2026_)	 			        		

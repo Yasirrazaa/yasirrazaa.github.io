@@ -1,6 +1,6 @@
-## Structuring an AI Project: Importance, Benefits, and Automated Solutions
+# Structuring an AI Project: Importance, Benefits, and Automated Solutions
 
-### Introduction
+## Introduction
 
 In the rapidly evolving field of Artificial Intelligence (AI), structuring a project effectively is a cornerstone of successful project management. A well-organized project ensures all components are logically arranged, easily accessible, and maintainable, which is essential for collaboration, reproducibility, and adhering to industry standards. This blog post explores the significance of structuring AI projects, the challenges of doing it manually, and how an automated tool, like our provided script, can streamline this process.
 
@@ -10,7 +10,7 @@ Proper project structure enhances efficiency by reducing redundancy, improving a
 
 In research and development, structured projects ensure reproducibility and simplify debugging. Experiments can be easily replicated, and issues can be pinpointed and resolved efficiently. Structured projects also scale better because they allow for easy integration of new features and modules without disrupting existing workflows. Additionally, they are more maintainable, enabling straightforward updates and compliance with industry standards through comprehensive documentation and traceability.
 
-### Challenges of Manual Structuring
+## Challenges of Manual Structuring
 
 Manually structuring an AI project involves several steps, each with its own challenges:
 
@@ -34,11 +34,11 @@ Manually structuring an AI project involves several steps, each with its own cha
     - Setting up Continuous Integration/Continuous Deployment (CI/CD) pipelines manually is complex.
     - Ongoing maintenance is required to ensure functionality.
 
-### Automated Structuring with the Script
+## Automated Structuring with the Script
 
 Our provided script automates the structuring of AI projects, addressing the challenges of manual structuring. Here’s a detailed look at the script's features and how they streamline the project setup process:
 
-#### Automated Directory Creation
+### Automated Directory Creation
 
 The script automatically creates a well-defined directory structure for various project components, ensuring consistency and logical separation. This includes directories for artifacts, configuration files, logs, research notebooks, and source code. Such a structure enhances efficiency, accessibility, and organization from the get-go.
 
@@ -67,7 +67,7 @@ create_project_directories() {
 }
 ```
 
-#### Virtual Environment Setup
+### Virtual Environment Setup
 
 The script creates and activates a virtual environment, managing dependencies automatically. This ensures consistency across different development environments and avoids dependency conflicts by maintaining separate environments for different projects.
 
@@ -77,7 +77,7 @@ create_venv() {
 }
 ```
 
-#### Version Control Initialization
+### Version Control Initialization
 
 The script initializes a Git repository and creates a `.gitignore` file, promoting version control best practices from the start. This facilitates effective change tracking and enables multiple developers to work on the project simultaneously without conflicts.
 
@@ -98,7 +98,7 @@ EOF
 }
 ```
 
-#### Configuration File Creation
+### Configuration File Creation
 
 The script generates essential configuration files, such as `config.yaml` and `requirements.txt`, ensuring configurations are documented and maintained. This eliminates the tedious and error-prone manual process of listing dependencies and configurations.
 
@@ -111,7 +111,7 @@ create_requirements_file() {
 }
 ```
 
-#### Documentation
+### Documentation
 
 The script creates a README file and other necessary documentation, ensuring comprehensive and up-to-date project documentation. Clear instructions and descriptions help team members and users understand the project, and keeping documentation organized and consistent is much easier.
 
@@ -125,7 +125,7 @@ EOF
 }
 ```
 
-#### Logging Setup
+### Logging Setup
 
 The script creates a structured log directory and log files, promoting good logging practices essential for debugging and monitoring. Keeping track of events and errors throughout the project lifecycle becomes straightforward.
 
@@ -143,7 +143,7 @@ create_log_directory() {
 }
 ```
 
-#### Research Directory
+### Research Directory
 
 The script creates a structured directory for Jupyter notebooks, facilitating exploratory data analysis and model development. This includes notebook files for various stages of the project, such as data collection, ingestion, preprocessing, exploratory data analysis, feature engineering, model training, evaluation, and deployment.
 
@@ -168,7 +168,7 @@ create_research_directory() {
 }
 ```
 
-### Using the Script
+## Using the Script
 
 To use the script on a local PC, follow these steps:
 
@@ -176,15 +176,15 @@ To use the script on a local PC, follow these steps:
 
 2. **Make the Script Executable**: Open a terminal, navigate to the directory where the script is saved, and run the following command:
     ```bash
-    chmod +x ai_project_generator.sh
+    chmod +x script.sh
     ```
 
 3. **Run the Script**: Execute the script by running:
     ```bash
-    ./ai_project_generator.sh
+    ./script.sh project_name
     ```
-   Follow the on-screen instructions to enter the project name and let the script perform the setup.
+   Do not include spaces and special characters except underscore(_) in the project name.
 
-### Conclusion
+## Conclusion
 
 Structuring an AI project is crucial for efficiency, collaboration, reproducibility, scalability, and compliance. While manual structuring is feasible, it is time-consuming and prone to errors. Our provided script automates the structuring process, offering a consistent, efficient, and scalable solution for managing end-to-end AI projects. By using such automation tools, AI developers can focus on innovation and development, leveraging structured practices to achieve better project outcomes.

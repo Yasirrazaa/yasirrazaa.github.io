@@ -1,4 +1,4 @@
-# Structuring an AI Project: Importance, Benefits, and Automated Solutions
+## Structuring an AI Project: Importance, Benefits, and Automated Solutions
 
 ### Introduction
 

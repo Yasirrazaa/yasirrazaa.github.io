@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Sort by date descending
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featuredPost = allPosts.find(p => p.data.featured);
+
+// Exclude the featured post from the grid to avoid duplication
+const gridPosts = allPosts.filter(p => featuredPost ? p.id !== featuredPost.id : true);
+
+// Collect unique categories and tags
+const categories = Array.from(new Set(allPosts.map(p => p.data.category))).sort();
+const allTags = Array.from(new Set(allPosts.flatMap(p => p.data.tags))).sort();
+---
+
+<BaseLayout
+  title="Blog — Yasir Raza | AI Engineering Insights"
+  description="Deep dives into AI engineering, LLM agents, voice AI, fine-tuning, and production ML systems. Practical insights from real deployment experience."
+  canonical="https://yasirrazaa.github.io/blog"
+>
+  <!-- Hero -->
+  <section class="relative pt-40 pb-12 px-6 md:px-12" style="z-index: 3;">
+    <div class="glow-amber" style="top: 0; right: 10%;"></div>
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label mb-6">Blog</div>
+      <h1 class="font-display text-5xl md:text-7xl leading-[0.95] mb-6">
+        Insights from <span style="color: var(--color-accent); font-style: italic;">shipping</span> AI.
+      </h1>
+      <p class="max-w-2xl text-lg" style="color: var(--color-muted);">
+        Deep dives into AI engineering, agent systems, model fine-tuning, voice AI, and building production ML systems. Practical lessons from real deployments.
+      </p>
+
+      <!-- Pagefind Search Input -->
+      <div class="flex flex-col sm:flex-row gap-4 mt-10 max-w-2xl">
+        <div class="relative flex-1">
+          <i class="fa-solid fa-search" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--color-muted-2); font-size: 0.85rem; pointer-events: none;"></i>
+          <input
+            type="text"
+            id="pagefind-search-input"
+            placeholder="Search articles..."
+            style="width: 100%; padding: 14px 16px 14px 40px; background: var(--color-card); border: 1px solid var(--color-border); color: var(--color-fg); font-family: inherit; font-size: 0.9rem; border-radius: 8px; outline: none; box-sizing: border-box;"
+          />
+        </div>
+      </div>
+
+      <!-- Category + Tag Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2 mt-6">
+        <button data-filter="category" data-value="all" class="filter-pill active px-4 py-2 text-xs font-mono uppercase tracking-wider"
+          style="border-radius: 999px; border: 1px solid var(--color-accent); background: var(--color-accent); color: var(--color-bg); transition: all 0.2s;">
+          All Posts
+        </button>
+        {categories.map(cat => (
+          <button data-filter="category" data-value={cat} class="filter-pill px-4 py-2 text-xs font-mono uppercase tracking-wider"
+            style="border-radius: 999px; border: 1px solid var(--color-border-strong); color: var(--color-muted); background: transparent; transition: all 0.2s;">
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Popular Tags -->
+      <div class="flex flex-wrap items-center gap-2 mt-4">
+        <span class="font-mono text-[10px] uppercase tracking-wider" style="color: var(--color-muted-2);">Tags:</span>
+        {allTags.slice(0, 10).map(tag => (
+          <button data-filter="tag" data-value={tag} class="filter-pill tag-pill px-3 py-1 text-[11px]"
+            style="border-radius: 999px; border: 1px solid var(--color-border-strong); color: var(--color-muted); background: transparent; transition: all 0.2s;">
+            #{tag}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post -->
+  {featuredPost && (
+    <section class="px-6 md:px-12 pb-16" style="z-index: 3;">
+      <div class="max-w-7xl mx-auto">
+        <a href={`/blog/posts/${featuredPost.id}`} class="block reveal group" id="featured-post">
+          <div class="grid md:grid-cols-12 gap-0" style="background: linear-gradient(135deg, rgba(255,107,26,0.05) 0%, transparent 50%); border: 1px solid var(--color-border); border-radius: 12px; overflow: hidden;">
+            {featuredPost.data.heroImage && (
+              <div class="md:col-span-6 relative overflow-hidden">
+                <img src={featuredPost.data.heroImage} alt={featuredPost.data.title} class="w-full h-full object-cover" style="aspect-ratio: 16/10; transition: transform 0.7s;" />
+              </div>
+            )}
+            <div class="md:col-span-6 p-8 md:p-12 flex flex-col justify-center">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 font-mono text-[10px] uppercase tracking-wider" style="background: rgba(255, 107, 26, 0.1); color: var(--color-accent); border-radius: 999px;">
+                  <i class="fa-solid fa-star" style="font-size: 8px;"></i> Featured
+                </span>
+                <span style="color: var(--color-muted-2);">·</span>
+                <span style="color: var(--color-muted); font-size: 0.85rem;">
+                  {new Date(featuredPost.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </span>
+              </div>
+              <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight" style="color: var(--color-fg);">{featuredPost.data.title}</h2>
+              <p class="mb-6 leading-relaxed" style="color: var(--color-muted);">{featuredPost.data.description}</p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                {featuredPost.data.tags.slice(0, 4).map(tag => <span class="tag">{tag}</span>)}
+              </div>
+              <div class="flex items-center gap-2 text-sm font-medium" style="color: var(--color-accent);">
+                Read Article <i class="fa-solid fa-arrow-right" style="font-size: 12px;"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <!-- Newsletter CTA -->
+  <section class="px-6 md:px-12 pb-20" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-lg mx-auto text-center p-8 md:p-10 reveal" style="background: var(--color-card); border: 1px solid var(--color-border); border-radius: 12px;">
+        <NewsletterForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Grid -->
+  <section class="px-6 md:px-12 pb-32" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      {allPosts.length === 0 ? (
+        <div class="text-center py-20">
+          <p style="color: var(--color-muted);">No articles published yet. Check back soon.</p>
+        </div>
+      ) : (
+        <>
+          <div class="flex items-center justify-between mb-8">
+            <p class="text-sm font-mono" style="color: var(--color-muted-2);">
+              <span id="post-count">{allPosts.length}</span> {allPosts.length === 1 ? 'article' : 'articles'}
+            </p>
+          </div>
+
+          <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {gridPosts.map((post, i) => (
+              <a href={`/blog/posts/${post.id}`} class="blog-card reveal group block" data-category={post.data.category} data-tags={post.data.tags.join(',')} style={`transition-delay: ${i * 0.05}s;`}>
+                <div style="background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden;" class="h-full flex flex-col">
+                  {post.data.heroImage && (
+                    <div class="relative overflow-hidden">
+                      <img src={post.data.heroImage} alt={post.data.title} class="w-full object-cover" style="aspect-ratio: 16/10; transition: transform 0.7s;" />
+                      <span class="absolute top-3 left-3 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider" style="background: rgba(10,9,8,0.75); color: var(--color-accent); border-radius: 999px; backdrop-filter: blur(8px);">
+                        {post.data.category}
+                      </span>
+                      {post.data.featured && (
+                        <span class="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-1 font-mono text-[10px] uppercase tracking-wider" style="background: rgba(255, 107, 26, 0.85); color: var(--color-bg); border-radius: 999px; backdrop-filter: blur(8px);">
+                          <i class="fa-solid fa-star" style="font-size: 7px;"></i> Featured
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div class="p-6 flex flex-col flex-1">
+                    <div class="flex items-center gap-2 text-xs mb-3" style="color: var(--color-muted-2);">
+                      {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </div>
+                    <h3 class="text-lg font-medium mb-3 line-clamp-2" style="color: var(--color-fg); line-height: 1.3;">{post.data.title}</h3>
+                    <p class="text-sm leading-relaxed flex-1 line-clamp-3" style="color: var(--color-muted);">{post.data.description}</p>
+                    <div class="flex flex-wrap gap-1.5 mt-4">
+                      {post.data.tags.slice(0, 3).map(tag => <span class="tag text-[10px]">#{tag}</span>)}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <!-- Pagefind results area (shown when search is active) -->
+          <div id="pagefind-results" class="hidden"></div>
+
+          <!-- Empty state -->
+          <div id="no-results" class="hidden text-center py-20">
+            <i class="fa-solid fa-search text-4xl mb-4" style="color: var(--color-muted-2);"></i>
+            <p class="text-lg mb-2" style="color: var(--color-fg);">No articles found</p>
+            <p style="color: var(--color-muted);">Try adjusting your search or filters</p>
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+  // ── In-page filter (category, tag) ──
+  const blogGrid = document.getElementById('blog-grid');
+  const blogCards = document.querySelectorAll('.blog-card');
+  const noResults = document.getElementById('no-results');
+  const postCount = document.getElementById('post-count');
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const featuredPost = document.getElementById('featured-post');
+  const resultsArea = document.getElementById('pagefind-results');
+  const searchInput = document.getElementById('pagefind-search-input');
+
+  let activeCategory = 'all';
+  let activeTag = '';
+  let pagefind = null;
+
+  function filterPosts() {
+    let visibleCount = 0;
+
+    blogCards.forEach(card => {
+      const category = card.dataset.category || '';
+      const tags = (card.dataset.tags || '').split(',');
+
+      const matchesCategory = activeCategory === 'all' || category === activeCategory;
+      const matchesTag = !activeTag || tags.includes(activeTag);
+
+      const visible = matchesCategory && matchesTag;
+      card.style.display = visible ? '' : 'none';
+      if (visible) visibleCount++;
+    });
+
+    // Also filter featured post by category
+    if (featuredPost) {
+      // Read category from the featured post's category badge
+      const catBadge = featuredPost.querySelector('.tag');
+      const fpCategory = catBadge ? catBadge.textContent?.toLowerCase().trim() || '' : '';
+      const matchesCategory = activeCategory === 'all' || fpCategory.includes(activeCategory.toLowerCase());
+      featuredPost.style.display = matchesCategory ? '' : 'none';
+      if (matchesCategory) visibleCount++;
+    }
+
+    if (postCount) postCount.textContent = visibleCount;
+    if (noResults) noResults.classList.toggle('hidden', visibleCount > 0);
+  }
+
+  // Filter pill handlers
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const filterType = pill.dataset.filter;
+      const value = pill.dataset.value;
+
+      if (filterType === 'category') {
+        activeCategory = value;
+        activeTag = '';
+        filterPills.forEach(p => {
+          if (p.dataset.filter === 'category') {
+            const isActive = p.dataset.value === value;
+            p.style.background = isActive ? 'var(--color-accent)' : 'transparent';
+            p.style.color = isActive ? 'var(--color-bg)' : 'var(--color-muted)';
+            p.style.borderColor = isActive ? 'var(--color-accent)' : 'var(--color-border-strong)';
+          }
+        });
+        document.querySelectorAll('.tag-pill').forEach(tp => {
+          tp.style.background = 'transparent';
+          tp.style.color = 'var(--color-muted)';
+          tp.style.borderColor = 'var(--color-border-strong)';
+        });
+      } else if (filterType === 'tag') {
+        if (activeTag === value) {
+          activeTag = '';
+          pill.style.background = 'transparent';
+          pill.style.color = 'var(--color-muted)';
+          pill.style.borderColor = 'var(--color-border-strong)';
+        } else {
+          activeTag = value;
+          document.querySelectorAll('.tag-pill').forEach(tp => {
+            tp.style.background = 'transparent';
+            tp.style.color = 'var(--color-muted)';
+            tp.style.borderColor = 'var(--color-border-strong)';
+          });
+          pill.style.background = 'rgba(255, 107, 26, 0.15)';
+          pill.style.color = 'var(--color-accent)';
+          pill.style.borderColor = 'var(--color-accent)';
+        }
+      }
+      filterPosts();
+    });
+  });
+
+  // ── Pagefind Search ──
+  // Load pagefind JS dynamically at runtime (avoids Vite build-time resolution)
+  async function loadPagefind() {
+    try {
+      const script = document.createElement('script');
+      script.src = '/pagefind/pagefind.js';
+      document.head.appendChild(script);
+
+      await new Promise((resolve, reject) => {
+        script.onload = resolve;
+        script.onerror = () => reject(new Error('Failed to load pagefind.js'));
+      });
+
+      pagefind = window.pagefind;
+      await pagefind.init();
+      console.log('Pagefind search ready');
+    } catch (e) {
+      console.warn('Pagefind not available, using in-page filter only', e);
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('focus', () => {
+      searchInput.style.borderColor = 'var(--color-accent)';
+      searchInput.style.boxShadow = '0 0 0 1px var(--color-accent)';
+    });
+    searchInput.addEventListener('blur', () => {
+      searchInput.style.borderColor = 'var(--color-border)';
+      searchInput.style.boxShadow = 'none';
+    });
+
+    let debounceTimer;
+    searchInput.addEventListener('input', async () => {
+      clearTimeout(debounceTimer);
+      const query = searchInput.value.trim();
+
+      debounceTimer = setTimeout(async () => {
+        // If pagefind isn't loaded yet, use simple in-page filter
+        if (!pagefind) {
+          const blogCards = document.querySelectorAll('.blog-card');
+          let visibleCount = 0;
+          blogCards.forEach(card => {
+            const title = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+            const desc = card.querySelector('p')?.textContent?.toLowerCase() || '';
+            const tags = (card.dataset.tags || '').toLowerCase();
+            const matches = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
+            card.style.display = matches ? '' : 'none';
+            if (matches) visibleCount++;
+          });
+          if (noResults) noResults.classList.toggle('hidden', visibleCount > 0);
+          if (postCount) postCount.textContent = visibleCount;
+          return;
+        }
+
+        if (!query) {
+          // Show original grid, hide results
+          if (blogGrid) blogGrid.classList.remove('hidden');
+          if (resultsArea) resultsArea.classList.add('hidden');
+          if (featuredPost) featuredPost.style.display = '';
+          filterPosts();
+          return;
+        }
+
+        const search = await pagefind.search(query);
+        const results = await Promise.all(search.results.slice(0, 12).map(r => r.data()));
+
+        // Hide original grid, show Pagefind results
+        if (blogGrid) blogGrid.classList.add('hidden');
+        if (featuredPost) featuredPost.style.display = 'none';
+        if (resultsArea) {
+          resultsArea.classList.remove('hidden');
+          resultsArea.innerHTML = results.length === 0
+            ? '<div class="text-center py-20"><i class="fa-solid fa-search text-4xl mb-4" style="color: var(--color-muted-2);"></i><p class="text-lg mb-2" style="color: var(--color-fg);">No results found</p><p style="color: var(--color-muted);">Try different search terms</p></div>'
+            : `<p class="text-sm font-mono mb-6" style="color: var(--color-muted-2);">${results.length} result${results.length === 1 ? '' : 's'} for "${query}"</p>` +
+              `<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">` +
+              results.map(r => {
+                const excerpt = (r.excerpt || '').replace(/<mark>/g, '<mark style="background:rgba(255,107,26,0.2);color:var(--color-accent);border-radius:2px;padding:0 2px;">').replace(/<\/mark>/g, '</mark>');
+                return `<a href="${r.url}" class="block group" style="background:var(--color-card);border:1px solid var(--color-border);border-radius:8px;overflow:hidden;"><div class="p-6"><h3 class="text-lg font-medium mb-2 line-clamp-2" style="color:var(--color-fg);line-height:1.3;">${r.meta?.title || ''}</h3><p class="text-sm leading-relaxed line-clamp-3" style="color:var(--color-muted);">${excerpt}</p></div></a>`;
+              }).join('') +
+              `</div>`;
+        }
+        if (postCount) postCount.textContent = results.length;
+      }, 250);
+    });
+  }
+
+  // Load Pagefind after initial render
+  loadPagefind();
+});
+</script>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .blog-card:hover img {
+    transform: scale(1.05);
+  }
+  #featured-post:hover img {
+    transform: scale(1.05);
+  }
+  #pagefind-results a:hover {
+    border-color: var(--color-accent) !important;
+  }
+  #pagefind-search-input:focus {
+    border-color: var(--color-accent) !important;
+    box-shadow: 0 0 0 1px var(--color-accent);
+  }
+</style>

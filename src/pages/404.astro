@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Page Not Found | Yasir Raza"
+  description="The page you're looking for doesn't exist."
+>
+  <section class="relative min-h-screen flex items-center justify-center px-6" style="z-index: 3;">
+    <div class="glow-amber" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    <div class="text-center max-w-lg">
+      <div class="font-display text-8xl md:text-9xl mb-6" style="color: var(--color-accent);">404</div>
+      <h1 class="font-display text-3xl md:text-4xl mb-4">Page not found</h1>
+      <p class="text-lg mb-10" style="color: var(--color-muted);">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/" class="inline-flex items-center gap-2 px-7 py-3.5 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+          <i class="fa-solid fa-house"></i> Go Home
+        </a>
+        <a href="/blog" class="inline-flex items-center gap-2 px-7 py-3.5 font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg);">
+          <i class="fa-solid fa-newspaper"></i> Read Blog
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

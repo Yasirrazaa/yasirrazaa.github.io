@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile, experience, credentials } from '../data/content';
+---
+
+<BaseLayout
+  title="About — Yasir Raza | AI Engineer"
+  description="Learn more about Yasir Raza — an AI Engineer specializing in LLM agents, voice AI, fine-tuning, and production AI deployments."
+  canonical="https://yasirrazaa.github.io/about"
+>
+  <!-- Hero -->
+  <section class="relative pt-40 pb-20 px-6 md:px-12" style="z-index: 3;">
+    <div class="glow-amber" style="top: 10%; right: 10%;"></div>
+    <div class="glow-cyan" style="bottom: 10%; left: 10%;"></div>
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="reveal">
+          <div class="section-label mb-6">About</div>
+          <h1 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+            Hi, I'm <span style="color: var(--color-accent); font-style: italic;">Yasir</span>.
+          </h1>
+          <p class="text-xl leading-relaxed mb-6" style="color: var(--color-fg);">
+            I'm an AI Engineer with a strong foundation in ML, DL, and production AI systems. I specialize in turning complex AI research into practical, deployable solutions that solve real problems.
+          </p>
+          <p class="text-lg leading-relaxed mb-8" style="color: var(--color-muted);">
+            My work sits at the intersection of <strong style="color: var(--color-fg);">LLM agent architecture</strong>, <strong style="color: var(--color-fg);">voice AI engineering</strong>, and <strong style="color: var(--color-fg);">production ML deployment</strong>. I don't just write prototypes — I build systems that ship.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-8">
+            <div class="flex items-center gap-2 text-sm" style="color: var(--color-muted);">
+              <i class="fa-solid fa-location-dot" style="color: var(--color-accent);"></i>
+              {profile.location}
+            </div>
+            <div class="flex items-center gap-2 text-sm" style="color: var(--color-muted);">
+              <i class="fa-regular fa-envelope" style="color: var(--color-accent);"></i>
+              {profile.email}
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <a href="/contact" class="inline-flex items-center gap-2 px-7 py-3.5 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+              Work With Me <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href={profile.github} target="_blank" class="inline-flex items-center gap-2 px-7 py-3.5 font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg);">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+
+        <!-- Stats card -->
+        <div class="reveal">
+          <div class="p-8 md:p-10" style="background: var(--color-card); border: 1px solid var(--color-border);">
+            <div class="text-center mb-8">
+              <div class="w-24 h-24 mx-auto flex items-center justify-center font-display text-3xl" style="background: var(--color-accent); color: var(--color-bg);">YR</div>
+              <h3 class="text-xl font-medium mt-4">{profile.name}</h3>
+              <p style="color: var(--color-muted);">AI Engineer</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              {[
+                { label: "PyPI Downloads", value: "10.7K+" },
+                { label: "Open-Source Projects", value: "8" },
+                { label: "Remote Experience", value: "18 mo" },
+                { label: "Kaggle", value: "2× Expert" },
+              ].map(stat => (
+                <div class="text-center p-4" style="border: 1px solid var(--color-border);">
+                  <div class="font-display text-2xl" style="color: var(--color-accent);">{stat.value}</div>
+                  <div class="text-xs mt-1" style="color: var(--color-muted-2);">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills & Technologies -->
+  <section class="py-24 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <h2 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+          Technologies I <span style="color: var(--color-accent); font-style: italic;">work with</span>.
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[
+          { title: "Agent Orchestration", items: ["LangGraph", "LangChain", "LlamaIndex", "FastMCP", "MCP", "A2A"] },
+          { title: "LLM Training & Evals", items: ["GRPO / RLVR (TRL)", "SFT", "LoRA/QLoRA", "Reward design", "Contamination-checked harnesses"] },
+          { title: "Voice & Multimodal", items: ["CUDA Graphs", "Faster-Whisper", "ElevenLabs", "Fish-Speech", "Gemini", "Twilio"] },
+          { title: "Infra & Deployment", items: ["FastAPI", "Docker", "RunPod", "AWS", "CI/CD", "PostgreSQL/asyncpg"] },
+          { title: "Retrieval & Memory", items: ["Chroma", "Hybrid Search", "Semantic Chunking", "RAG"] },
+          { title: "Programming & Data", items: ["Python", "TypeScript", "SQL", "Bash", "pandas", "Scrapy", "Playwright"] },
+          { title: "Developer Quality", items: ["pytest (500+ tests)", "ruff", "mypy", "Sphinx", "GitHub Actions"] },
+          { title: "Certifications", items: ["Google Gen AI", "NUST LLM Bootcamp", "DataCamp DS/DA", "Kaggle"] },
+        ].map((group) => (
+          <div class="reveal p-6" style="background: var(--color-card); border: 1px solid var(--color-border);">
+            <h3 class="font-mono text-xs tracking-wider uppercase mb-4" style="color: var(--color-accent);">{group.title}</h3>
+            <div class="flex flex-wrap gap-2">
+              {group.items.map(item => (
+                <span class="tag">{item}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey -->
+  <section class="py-24 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <h2 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+          Professional <span style="color: var(--color-accent); font-style: italic;">journey</span>.
+        </h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        {experience.map((exp) => (
+          <div class="reveal" style="position: relative; padding-left: 2.5rem; padding-bottom: 3rem; border-left: 1px solid var(--color-border-strong);">
+            <div style="position: absolute; left: -5px; top: 4px; width: 9px; height: 9px; background: var(--color-accent); border-radius: 50%;"></div>
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+              <h3 class="text-2xl font-medium">{exp.role}</h3>
+              <span class="font-mono text-sm" style="color: var(--color-accent);">{exp.period}</span>
+            </div>
+            <div class="font-mono text-sm mb-4" style="color: var(--color-muted);">{exp.org}</div>
+            <p style="color: var(--color-muted);" class="leading-relaxed">{exp.note}</p>
+          </div>
+        ))}
+
+        <div class="mt-12 reveal" style="background: var(--color-card); border: 1px solid var(--color-border); padding: 2rem;">
+          <h3 class="font-display text-3xl mb-6">Education & Certifications</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            {credentials.map(cred => (
+              <div style="padding: 1rem; border: 1px solid var(--color-border);">
+                <p class="font-medium">{cred.title}</p>
+                <p class="text-sm" style="color: var(--color-muted);">{cred.issuer}</p>
+                <p class="font-mono text-xs mt-2" style="color: var(--color-accent);">{cred.year}</p>
+              </div>
+            ))}
+          </div>
+          <a href="/#resume" class="inline-flex items-center gap-2 mt-6 px-6 py-3 text-sm font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg);">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>Download role-tailored résumés</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-32 px-6 md:px-12 text-center" style="z-index: 3;">
+    <div class="max-w-4xl mx-auto reveal">
+      <h2 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+        Let's build <span style="color: var(--color-accent); font-style: italic;">together</span>.
+      </h2>
+      <p class="text-lg mb-10 max-w-2xl mx-auto" style="color: var(--color-muted);">
+        Whether you need a technical partner, a dedicated engineer, or strategic guidance on your AI project — I'm here to help.
+      </p>
+      <a href="/contact" class="inline-flex items-center gap-2 px-8 py-4 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+        Get in Touch <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

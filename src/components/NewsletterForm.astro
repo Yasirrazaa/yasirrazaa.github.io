@@ -1,0 +1,84 @@
+---
+// Newsletter subscription form using Follow.it
+// 1. Sign up at https://follow.it
+// 2. Paste your RSS feed URL: https://yasirrazaa.github.io/rss.xml
+// 3. Replace the action URL below with your Follow.it subscription form URL
+// 4. Optionally configure Follow.it to auto-send on new posts
+
+export interface Props {
+  variant?: 'default' | 'compact' | 'footer';
+  placeholder?: string;
+  buttonText?: string;
+}
+
+const {
+  variant = 'default',
+  placeholder = 'you@example.com',
+  buttonText = 'Subscribe',
+} = Astro.props;
+
+const isCompact = variant === 'compact';
+const isFooter = variant === 'footer';
+---
+
+<div class="newsletter-form" class:list={{ 'compact': isCompact, 'footer': isFooter }}>
+  {!isCompact && !isFooter && (
+    <>
+      <h3 class="font-display text-2xl mb-2" style="color: var(--color-fg);">
+        Stay in the <span style="color: var(--color-accent); font-style: italic;">loop</span>
+      </h3>
+      <p class="text-sm mb-6" style="color: var(--color-muted);">
+        Get notified when I publish new articles. No spam, just AI engineering insights.
+      </p>
+    </>
+  )}
+
+  {isFooter && (
+    <p class="text-sm mb-4" style="color: var(--color-muted);">
+      Get notified when I publish new articles
+    </p>
+  )}
+
+  {isCompact && (
+    <p class="font-mono text-xs tracking-wider uppercase mb-3" style="color: var(--color-muted);">
+      Newsletter
+    </p>
+  )}
+
+  <form
+    action="https://api.follow.it/subscription-form/YOUR_FOLLOW_IT_KEY"
+    method="post"
+    target="_blank"
+    class="flex"
+    class:list={{ 'flex-col gap-3': !isCompact, 'flex-row gap-2': isCompact }}
+  >
+    <input
+      type="email"
+      name="email"
+      placeholder={placeholder}
+      required
+      class="flex-1"
+      style="background: var(--color-card); border: 1px solid var(--color-border-strong); color: var(--color-fg); font-family: inherit; font-size: 0.85rem; padding: 0.65rem 0.85rem; outline: none; border-radius: 0;"
+    />
+    <button
+      type="submit"
+      class="font-medium whitespace-nowrap"
+      style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent); font-size: 0.85rem; padding: 0.65rem 1.25rem; cursor: pointer; transition: opacity 0.2s;"
+    >
+      {buttonText}
+    </button>
+  </form>
+
+  <p class="text-[11px] mt-2" style="color: var(--color-muted-2);">
+    No spam. Unsubscribe anytime.
+  </p>
+</div>
+
+<style>
+  .newsletter-form input:focus {
+    border-color: var(--color-accent) !important;
+  }
+  .newsletter-form button:hover {
+    opacity: 0.9;
+  }
+</style>

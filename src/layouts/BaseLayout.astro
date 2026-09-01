@@ -1,0 +1,332 @@
+---
+import '../styles/global.css';
+import ThemeScript from '../components/ThemeScript.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import { profile } from '../data/content';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const { title, description, canonical, ogImage } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Inline theme script — runs before paint to prevent flash -->
+    <ThemeScript />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="AI engineer, LLM agents, voice AI, fine-tuning, MCP server, machine learning, portfolio, freelance AI developer" />
+    <meta name="author" content={profile.name} />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical || 'https://yasirrazaa.github.io'} />
+    <meta property="og:image" content={ogImage || '/og-image.jpg'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- View Transition animation styles (Astro v7 enables View Transitions by default) -->
+    <style is:global>
+      ::view-transition-old(root) {
+        animation: 0.2s ease-out both fade-out;
+      }
+      ::view-transition-new(root) {
+        animation: 0.3s ease-out both fade-in;
+      }
+      @keyframes fade-out {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    </style>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Cloudflare Web Analytics (free, privacy-first) -->
+    <!-- Replace YOUR_TOKEN with your Cloudflare Web Analytics token -->
+    <!-- Get it at https://cloudflare.com -> Web Analytics -> Add site -->
+    {import.meta.env.PUBLIC_CLOUDFLARE_TOKEN && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${import.meta.env.PUBLIC_CLOUDFLARE_TOKEN}"}`}></script>
+    )}
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": profile.name,
+      "jobTitle": "AI Engineer",
+      "url": "https://yasirrazaa.github.io",
+      "sameAs": [
+        profile.github,
+        profile.linkedin,
+        profile.kaggle,
+      ],
+      "knowsAbout": ["Artificial Intelligence", "Machine Learning", "LLM Agents", "Voice AI", "Fine-tuning", "MCP Servers", "Python", "LangGraph", "RAG Systems"],
+      "description": profile.summary,
+    })} />
+    {canonical && <link rel="canonical" href={canonical} />}
+  </head>
+  <body>
+    <!-- Neural network canvas -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="backdrop-filter: blur(24px); background: var(--color-nav-bg); border-bottom: 1px solid var(--color-border);">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-8 h-8 border border-[var(--color-accent)] flex items-center justify-center font-display text-lg" style="color: var(--color-accent);">Y</div>
+          <span class="font-mono text-sm tracking-wider hidden sm:inline" style="color: var(--color-fg);">YASIR.RAZA</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/" class="nav-link" style="color: var(--color-muted); transition: color 0.3s ease; font-size: 0.875rem;">Home</a>
+          <a href="/#work" class="nav-link" style="color: var(--color-muted); transition: color 0.3s ease; font-size: 0.875rem;">Work</a>
+          <a href="/#certificates" class="nav-link" style="color: var(--color-muted); transition: color 0.3s ease; font-size: 0.875rem;">Certificates</a>
+          <a href="/blog" class="nav-link" style="color: var(--color-muted); transition: color 0.3s ease; font-size: 0.875rem;">Blog</a>
+          <a href="/contact" class="nav-link" style="color: var(--color-muted); transition: color 0.3s ease; font-size: 0.875rem;">Contact</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <ThemeToggle />
+          <a href="/contact" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+            <span>Book a Call</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main style="position: relative; z-index: 3;" data-pagefind-body>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer style="position: relative; z-index: 3; border-top: 1px solid var(--color-border); background: var(--color-bg-2);">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+          <div class="md:col-span-2">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-8 h-8 border flex items-center justify-center font-display text-lg" style="border-color: var(--color-accent); color: var(--color-accent);">Y</div>
+              <span class="font-mono text-lg" style="color: var(--color-fg);">Yasir Raza</span>
+            </div>
+            <p class="max-w-sm mb-6" style="color: var(--color-muted);">
+              AI Engineer specializing in LLM agents, voice AI, model fine-tuning, and production AI deployments. I ship systems that work outside the lab.
+            </p>
+            <div class="flex gap-4">
+              <a href={profile.github} target="_blank" class="w-10 h-10 border flex items-center justify-center" style="border-color: var(--color-border-strong); color: var(--color-muted);">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href={profile.linkedin} target="_blank" class="w-10 h-10 border flex items-center justify-center" style="border-color: var(--color-border-strong); color: var(--color-muted);">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href={profile.kaggle} target="_blank" class="w-10 h-10 border flex items-center justify-center" style="border-color: var(--color-border-strong); color: var(--color-muted);">
+                <i class="fa-brands fa-kaggle"></i>
+              </a>
+              <a href={`mailto:${profile.email}`} class="w-10 h-10 border flex items-center justify-center" style="border-color: var(--color-border-strong); color: var(--color-muted);">
+                <i class="fa-regular fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-mono text-xs tracking-wider uppercase mb-6" style="color: var(--color-muted);">Navigate</h4>
+            <div class="flex flex-col gap-3">
+              <a href="/" style="color: var(--color-muted);">Home</a>
+              <a href="/#work" style="color: var(--color-muted);">Projects</a>
+              <a href="/#certificates" style="color: var(--color-muted);">Certificates</a>
+              <a href="/#resume" style="color: var(--color-muted);">Résumé (PDF)</a>
+              <a href="/blog" style="color: var(--color-muted);">Blog</a>
+              <a href="/contact" style="color: var(--color-muted);">Contact</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-mono text-xs tracking-wider uppercase mb-6" style="color: var(--color-muted);">Newsletter</h4>
+            <NewsletterForm variant="footer" />
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-8" style="border-top: 1px solid var(--color-border);">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-sm" style="color: var(--color-muted);">© 2025 Yasir Raza · Built with intent</span>
+          </div>
+          <div class="flex items-center gap-6">
+            <a href="/" class="font-mono text-xs" style="color: var(--color-muted);">BACK TO TOP ↑</a>
+            <span class="font-mono text-xs" style="color: var(--color-muted-2);">Islamabad, Pakistan</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Neural network background
+      const canvas = document.getElementById('neural-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let nodes = [];
+        let mouse = { x: -1000, y: -1000 };
+        let animationId;
+
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        document.addEventListener('mousemove', (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+
+        class Node {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.25;
+            this.vy = (Math.random() - 0.5) * 0.25;
+            this.radius = Math.max(0.5, Math.random() * 1.5 + 0.5);
+            this.pulse = Math.random() * Math.PI * 2;
+          }
+          update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 180) {
+              const force = (180 - dist) / 180;
+              this.x -= dx * force * 0.015;
+              this.y -= dy * force * 0.015;
+            }
+            this.pulse += 0.025;
+          }
+          draw() {
+            const pulseSize = Math.max(0.3, Math.sin(this.pulse) * 0.4 + 1);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius * pulseSize, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 107, 26, 0.55)';
+            ctx.fill();
+          }
+        }
+
+        const nodeCount = window.innerWidth < 768 ? 50 : 90;
+        for (let i = 0; i < nodeCount; i++) nodes.push(new Node());
+
+        function drawConnections() {
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const dx = nodes[i].x - nodes[j].x;
+              const dy = nodes[i].y - nodes[j].y;
+              const dist = Math.sqrt(dx*dx + dy*dy);
+              if (dist < 140) {
+                const opacity = (1 - dist / 140) * 0.18;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.strokeStyle = `rgba(255, 107, 26, ${opacity})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+            const dx = mouse.x - nodes[i].x;
+            const dy = mouse.y - nodes[i].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 220) {
+              const opacity = (1 - dist / 220) * 0.5;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(mouse.x, mouse.y);
+              ctx.strokeStyle = `rgba(94, 234, 212, ${opacity})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+
+        function animateNeural() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          nodes.forEach(n => { n.update(); n.draw(); });
+          drawConnections();
+          animationId = requestAnimationFrame(animateNeural);
+        }
+        animateNeural();
+      }
+
+      // Scroll reveal
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      });
+
+      // Counter animation
+      function animateCounter(el) {
+        const target = parseFloat(el.dataset.target);
+        const decimals = parseInt(el.dataset.decimals || '0');
+        const duration = 2000;
+        const start = performance.now();
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = target * easeOut;
+          el.textContent = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = decimals > 0 ? target.toFixed(decimals) : target;
+        }
+        requestAnimationFrame(update);
+      }
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+      // Metric bars
+      const metricObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const width = entry.target.dataset.width;
+            entry.target.style.width = width + '%';
+            metricObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.metric-bar-fill').forEach(el => metricObserver.observe(el));
+
+      // Nav link hover effect
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('mouseenter', () => { link.style.color = '#f5f3ef'; });
+        link.addEventListener('mouseleave', () => { link.style.color = '#8b857a'; });
+      });
+    </script>
+  </body>
+</html>

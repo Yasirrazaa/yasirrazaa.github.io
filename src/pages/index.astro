@@ -1,0 +1,365 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile, stats, projects, experience, credentials, certificates, resumeVariants } from '../data/content';
+
+const featuredProjects = projects.filter(p => p.featured);
+const otherProjects = projects.filter(p => !p.featured);
+---
+
+<BaseLayout
+  title="Yasir Raza — AI Engineer | LLM Agents, Voice AI & Production AI"
+  description="Portfolio of Yasir Raza, an AI Engineer specializing in LLM training (GRPO/RLVR), agents, voice AI, MCP tooling, and production AI deployments. 10.7K+ PyPI downloads."
+  canonical="https://yasirrazaa.github.io"
+>
+  <!-- Hero Section -->
+  <section id="hero" class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12" style="z-index: 3;">
+    <div class="glow-amber" style="top: 10%; right: -10%;"></div>
+    <div class="glow-cyan" style="bottom: 5%; left: -5%;"></div>
+    
+    <div class="max-w-7xl mx-auto w-full relative">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="status-dot"></span>
+        <span class="font-mono text-xs tracking-widest uppercase" style="color: var(--color-muted);">Shipping applied AI · Remote / Islamabad</span>
+      </div>
+      
+      <h1 class="font-display text-[14vw] md:text-[10vw] leading-[0.9] tracking-tight mb-8">
+        <span class="block">Building the</span>
+        <span class="block">systems layer <span class="font-display" style="color: var(--color-accent); font-style: italic;">between</span></span>
+        <span class="block">LLMs and reality.</span>
+      </h1>
+      
+      <div class="grid md:grid-cols-2 gap-12 mt-16">
+        <div>
+          <p class="text-lg md:text-xl leading-relaxed" style="color: var(--color-muted);">
+            I'm <span style="color: var(--color-fg);">Yasir Raza</span> — an AI Engineer building production-grade agent systems, multimodal voice interfaces, fine-tuned models, and MCP tooling. From ambiguous prototype to measurable ROI.
+          </p>
+          
+          <div class="flex flex-wrap gap-4 mt-8">
+            <a href="/contact" class="inline-flex items-center gap-2 px-7 py-3.5 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+              <span>Get in Touch</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#work" class="inline-flex items-center gap-2 px-7 py-3.5 font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg);">
+              <span>Selected Work</span>
+              <i class="fa-regular fa-eye"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="flex md:justify-end items-end">
+          <div class="grid grid-cols-2 gap-8 md:gap-12">
+            {stats.slice(0, 4).map((stat) => (
+              <div key={stat.label}>
+                <div class="font-display text-4xl md:text-5xl" style="color: var(--color-accent);">
+                  {stat.value}
+                </div>
+                <div class="font-mono text-xs mt-2 tracking-wider" style="color: var(--color-muted);">
+                  {stat.label.toUpperCase()}
+                </div>
+                <div class="font-mono text-[10px] mt-1" style="color: var(--color-muted-2);">
+                  {stat.detail}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee relative" style="z-index: 3;">
+    <div class="marquee-track">
+      {['Python', 'PyTorch', 'LangGraph', 'Unsloth', 'FastAPI', 'Docker', 'LLamaIndex', 'LoRA/PEFT', 'MCP', 'RunPod'].map(tech => (
+        <span class="marquee-item">
+          <span>{tech}</span><span class="dot"></span>
+        </span>
+      ))}
+      {['Python', 'PyTorch', 'LangGraph', 'Unsloth', 'FastAPI', 'Docker', 'LLamaIndex', 'LoRA/PEFT', 'MCP', 'RunPod'].map(tech => (
+        <span class="marquee-item">
+          <span>{tech}</span><span class="dot"></span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- About / Positioning -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-12 gap-12">
+        <div class="md:col-span-4 reveal">
+          <div class="section-label mb-6">01 / About</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight">
+            A builder at the <span style="color: var(--color-accent); font-style: italic;">intersection</span> of research and shipping.
+          </h2>
+        </div>
+        
+        <div class="md:col-span-7 md:col-start-6 reveal">
+          <p class="text-xl leading-relaxed mb-8" style="color: var(--color-fg);">
+            I've spent the last 3+ years turning applied ML research into systems that process real data — thousands of AI tools verified for a recommendation engine, job-posting intelligence at scale, a 7,275-test production agent platform, and PyPI packages with thousands of downloads.
+          </p>
+          <p class="text-lg leading-relaxed mb-8" style="color: var(--color-muted);">
+            My work spans the full stack of applied AI: designing agent architectures with LangGraph and pure-Python frameworks, building RAG pipelines, deploying voice agents on serverless GPU infrastructure, and shipping security platforms measured by 2,000+ tests. I'm obsessed with the parts that separate demos from products — latency budgets, evaluation harnesses, safety filters, and reproducible deployment runbooks.
+          </p>
+          <p class="text-lg leading-relaxed" style="color: var(--color-muted);">
+            Previously building data pipelines and AI systems at Teamlift (US remote). Graduated B.Sc. Software Engineering (NUML, Aug 2026). Currently open to AI engineering roles, freelance projects, and interesting collaborations in the agentic AI space.
+          </p>
+          
+          <div class="grid grid-cols-2 gap-6 mt-12">
+            <div style="border-top: 1px solid var(--color-border-strong); padding-top: 1.5rem;">
+              <div class="font-mono text-xs tracking-wider mb-2" style="color: var(--color-muted);">CORE FOCUS</div>
+              <div class="text-lg">LLM Agents & Voice AI</div>
+            </div>
+            <div style="border-top: 1px solid var(--color-border-strong); padding-top: 1.5rem;">
+              <div class="font-mono text-xs tracking-wider mb-2" style="color: var(--color-muted);">SECONDARY</div>
+              <div class="text-lg">Fine-tuning, RAG, MLOps</div>
+            </div>
+            <div style="border-top: 1px solid var(--color-border-strong); padding-top: 1.5rem;">
+              <div class="font-mono text-xs tracking-wider mb-2" style="color: var(--color-muted);">BASED IN</div>
+              <div class="text-lg">Islamabad, Pakistan</div>
+            </div>
+            <div style="border-top: 1px solid var(--color-border-strong); padding-top: 1.5rem;">
+              <div class="font-mono text-xs tracking-wider mb-2" style="color: var(--color-muted);">AVAILABILITY</div>
+              <div class="text-lg" style="color: var(--color-accent-2);">Open for freelance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 reveal">
+        <div>
+          <div class="section-label mb-6">02 / Capabilities</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight">
+            What I <span style="color: var(--color-accent); font-style: italic;">build</span>.
+          </h2>
+        </div>
+        <p class="max-w-md text-lg" style="color: var(--color-muted);">
+          Specialized across the full AI engineering lifecycle — from whiteboard to deployment to monitoring.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { icon: "fa-solid fa-robot", title: "Agentic AI Systems", desc: "Custom autonomous agents using LangGraph & LangChain. Multimodal inputs, tool-use, memory, and complex task decomposition for real-world automation." },
+          { icon: "fa-solid fa-microchip", title: "LLM Fine-Tuning", desc: "Domain-specific model adaptation using PEFT, LoRA, QLoRA via Unsloth. Specialize models on proprietary data without breaking the bank on compute." },
+          { icon: "fa-solid fa-database", title: "RAG & Data Pipelines", desc: "Production-grade Retrieval Augmented Generation. Semantic chunking, hybrid retrieval, and vector search to ground LLMs in enterprise knowledge." },
+          { icon: "fa-solid fa-microphone", title: "Voice & Multimodal Agents", desc: "Real-time voice/video assistants with cloned voice, emotional TTS, and multimodal understanding. Built for accessibility and personalized UX." },
+          { icon: "fa-solid fa-code", title: "MCP Server Development", desc: "Model Context Protocol servers enabling LLMs to interact with tools and environments. NotebookLLM has 10.7K+ PyPI downloads." },
+          { icon: "fa-solid fa-server", title: "MLOps & Deployment", desc: "Dockerized, CI/CD-driven deployment. Serverless inference, FastAPI wrappers, and robust monitoring for production AI systems." },
+        ].map((cap, i) => (
+          <div class="reveal card-hover p-8" style={`background: var(--color-card); border: 1px solid var(--color-border); transition-delay: ${i * 0.1}s;`}>
+            <div class="w-12 h-12 border flex items-center justify-center mb-6" style="border-color: var(--color-border-strong);">
+              <i class={`${cap.icon}`} style="color: var(--color-accent);"></i>
+            </div>
+            <h3 class="text-xl font-medium mb-3">{cap.title}</h3>
+            <p style="color: var(--color-muted);" class="leading-relaxed">{cap.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section id="work" class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 reveal">
+        <div>
+          <div class="section-label mb-6">03 / Selected Work</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight">
+            Things I've <span style="color: var(--color-accent); font-style: italic;">shipped</span>.
+          </h2>
+        </div>
+        <p class="max-w-md text-lg" style="color: var(--color-muted);">
+          Open-source packages, agent systems, and production deployments. Each one taught me something I didn't know.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        {featuredProjects.map((project) => (
+          <a href={project.href || '#'} target={project.href ? '_blank' : '_self'} class="project-card p-8 md:p-10 reveal group block" style="background: var(--color-card); border: 1px solid var(--color-border); position: relative; overflow: hidden;">
+            <div class="flex items-start justify-between mb-8">
+              <div class="font-mono text-xs tracking-wider" style="color: var(--color-muted);">001 / FLAGSHIP</div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--color-muted);"></i>
+            </div>
+            <h3 class="font-display text-4xl md:text-5xl mb-4 leading-tight">{project.title}</h3>
+            <p class="text-lg mb-6 leading-relaxed" style="color: var(--color-muted);">{project.description}</p>
+            <p class="text-sm mb-4" style="color: var(--color-accent-2);">→ {project.impact}</p>
+            {project.metrics && (
+              <div class="flex flex-wrap gap-2 mb-6">
+                {project.metrics.map(metric => <span class="metric-chip">{metric}</span>)}
+              </div>
+            )}
+            <div class="flex flex-wrap gap-2">
+              {project.stack.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          </a>
+        ))}
+        
+        {otherProjects.map((project, i) => (
+          <a href={project.href || '#'} target={project.href ? '_blank' : '_self'} class="project-card p-8 md:p-10 reveal group block" style={`background: var(--color-card); border: 1px solid var(--color-border); transition-delay: ${(i + 1) * 0.1}s;`}>
+            <div class="flex items-start justify-between mb-6">
+              <div class="font-mono text-xs tracking-wider" style="color: var(--color-muted);">{String(i + 2).padStart(3, '0')}</div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--color-muted);"></i>
+            </div>
+            <h3 class="font-display text-3xl md:text-4xl mb-4 leading-tight">{project.title}</h3>
+            <p class="text-base mb-4 leading-relaxed" style="color: var(--color-muted);">{project.description}</p>
+            <p class="text-sm mb-4" style="color: var(--color-accent-2);">{project.impact}</p>
+            {project.metrics && (
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.metrics.map(metric => <span class="metric-chip">{metric}</span>)}
+              </div>
+            )}
+            <div class="flex flex-wrap gap-2">
+              {project.stack.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-12 gap-12">
+        <div class="md:col-span-4 reveal">
+          <div class="section-label mb-6">04 / Experience</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight">
+            The <span style="color: var(--color-accent); font-style: italic;">path</span> here.
+          </h2>
+        </div>
+        
+        <div class="md:col-span-7 md:col-start-6 reveal">
+          <div class="space-y-0">
+            {experience.map((exp) => (
+              <div style="position: relative; padding-left: 2.5rem; padding-bottom: 3rem; border-left: 1px solid var(--color-border-strong);">
+                <div style="position: absolute; left: -5px; top: 4px; width: 9px; height: 9px; background: var(--color-accent); border-radius: 50%;"></div>
+                <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+                  <h3 class="text-2xl font-medium">{exp.role}</h3>
+                  <span class="font-mono text-sm" style="color: var(--color-accent);">{exp.period}</span>
+                </div>
+                <div class="font-mono text-sm mb-4" style="color: var(--color-muted);">{exp.org}</div>
+                <p style="color: var(--color-muted);" class="leading-relaxed">{exp.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certificates" class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 reveal">
+        <div>
+          <div class="section-label mb-6">05 / Certifications</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight">
+            Verified <span style="color: var(--color-accent); font-style: italic;">credentials</span>.
+          </h2>
+        </div>
+        <p class="max-w-md text-lg" style="color: var(--color-muted);">
+          Career tracks, professional certificates, and skill badges — every one publicly verifiable.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certificates.map((cert, i) => (
+          <a
+            href={cert.href || '#'}
+            target={cert.href ? '_blank' : '_self'}
+            class={`card-hover p-7 flex flex-col gap-3 ${!cert.href ? 'pointer-events-none' : ''}`}
+            style={`background: var(--color-card); border: 1px solid var(--color-border); transition-delay: ${(i % 3) * 0.08}s;`}
+          >
+            <div class="flex items-start justify-between">
+              <i
+                class={cert.kind === 'track' ? 'fa-solid fa-graduation-cap' : cert.kind === 'badge' ? 'fa-solid fa-award' : cert.kind === 'bootcamp' ? 'fa-solid fa-chalkboard-user' : 'fa-solid fa-certificate'}
+                style="color: var(--color-accent); font-size: 1.4rem;"
+              ></i>
+              {cert.href && <i class="fa-solid fa-arrow-up-right-from-square text-xs" style="color: var(--color-muted);"></i>}
+            </div>
+            {cert.image && (
+              <div class="mb-2 overflow-hidden" style="border: 1px solid var(--color-border); max-height: 9rem;">
+                <img src={cert.image} alt={`${cert.title} certificate — ${cert.issuer}`} loading="lazy" class="w-full h-36 object-cover object-top" />
+              </div>
+            )}
+            <h3 class="text-lg font-medium leading-snug">{cert.title}</h3>
+            <p class="text-sm" style="color: var(--color-muted);">{cert.issuer}</p>
+            <div class="font-mono text-xs mt-auto pt-2" style="color: var(--color-accent-2);">{cert.year}</div>
+          </a>
+        ))}
+      </div>
+
+      <p class="text-sm mt-8 reveal" style="color: var(--color-muted-2);">
+        Certificate scans (Kaggle, NUST) are hosted in <a href="/certificates/kaggle-python.png" target="_blank" style="color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px;">/certificates</a> and linked inline above.
+      </p>
+    </div>
+  </section>
+
+  <!-- Resume variants -->
+  <section id="resume" class="relative py-32 px-6 md:px-12" style="z-index: 3; background: var(--color-bg-2); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 reveal">
+        <div>
+          <div class="section-label mb-6">06 / Résumé</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight">
+            Five versions, <span style="color: var(--color-accent); font-style: italic;">one story</span>.
+          </h2>
+        </div>
+        <p class="max-w-md text-lg" style="color: var(--color-muted);">
+          Role-tailored, ATS-friendly resumes. Same verified track record, different emphasis — pick the one that matches your open role.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        {resumeVariants.map((variant, i) => (
+          <div
+            class="card-hover p-7 flex flex-col items-center text-center gap-3"
+            style={`background: var(--color-card); border: 1px solid var(--color-border); transition-delay: ${i * 0.08}s;`}
+          >
+            <i class={variant.icon} style="color: var(--color-accent); font-size: 1.6rem;"></i>
+            <h3 class="text-base font-medium">{variant.label}</h3>
+            <p class="text-xs leading-relaxed" style="color: var(--color-muted);">{variant.blurb}</p>
+            <div class="flex flex-wrap justify-center gap-2 mt-auto pt-3">
+              <a href={`/resumes/resume-${variant.slug}-1page.pdf`} target="_blank" class="resume-dl">
+                <i class="fa-solid fa-file-arrow-down"></i> 1-page
+              </a>
+              <a href={`/resumes/resume-${variant.slug}-full.pdf`} target="_blank" class="resume-dl">
+                <i class="fa-solid fa-file-lines"></i> full
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-32 px-6 md:px-12 text-center" style="z-index: 3;">
+    <div class="glow-amber" style="top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4;"></div>
+    <div class="max-w-4xl mx-auto reveal">
+      <div class="section-label justify-center mb-6 inline-flex">07 / Let's Build</div>
+      <h2 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+        Need an AI engineer who can ship?
+      </h2>
+      <p class="text-lg mb-10 max-w-2xl mx-auto" style="color: var(--color-muted);">
+        Whether you need a custom agent, fine-tuned model, voice interface, or production deployment — I can help you move from idea to shipped system.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#work" class="inline-flex items-center gap-2 px-8 py-4 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+          <span>Explore Projects</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="/contact" class="inline-flex items-center gap-2 px-8 py-4 font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg);">
+          <i class="fa-regular fa-envelope"></i>
+          <span>Get in Touch</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

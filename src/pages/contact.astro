@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/content';
+---
+
+<BaseLayout
+  title="Contact — Yasir Raza | AI Engineer"
+  description="Get in touch for AI engineering projects, freelance work, or collaboration. LLM agents, voice AI, fine-tuning, and production deployments."
+  canonical="https://yasirrazaa.github.io/contact"
+>
+  <!-- Hero -->
+  <section class="relative pt-40 pb-16 px-6 md:px-12" style="z-index: 3;">
+    <div class="glow-amber" style="top: 0; right: 10%;"></div>
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label mb-6">Contact</div>
+      <h1 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+        Let's build your <span style="color: var(--color-accent); font-style: italic;">AI edge</span>.
+      </h1>
+      <p class="max-w-2xl text-lg" style="color: var(--color-muted);">
+        Tell me about your project. Whether you have a fully specced plan or just a rough idea, I'll help you figure out the most efficient path to production.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Content -->
+  <section class="px-6 md:px-12 pb-32" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-12 gap-12">
+        <!-- Info -->
+        <div class="md:col-span-5 reveal">
+          <p class="text-lg mb-10 leading-relaxed" style="color: var(--color-muted);">
+            I respond to most messages within 24 hours. For urgent inquiries, feel free to reach out directly.
+          </p>
+          
+          <div class="space-y-6">
+            <a href={`mailto:${profile.email}`} class="flex items-center gap-4 group">
+              <div class="w-12 h-12 border flex items-center justify-center" style="border-color: var(--color-border-strong);">
+                <i class="fa-regular fa-envelope" style="color: var(--color-muted);"></i>
+              </div>
+              <div>
+                <div class="font-mono text-xs" style="color: var(--color-muted);">EMAIL</div>
+                <div style="color: var(--color-fg);">{profile.email}</div>
+              </div>
+            </a>
+            
+            <a href={profile.github} target="_blank" class="flex items-center gap-4 group">
+              <div class="w-12 h-12 border flex items-center justify-center" style="border-color: var(--color-border-strong);">
+                <i class="fa-brands fa-github" style="color: var(--color-muted);"></i>
+              </div>
+              <div>
+                <div class="font-mono text-xs" style="color: var(--color-muted);">GITHUB</div>
+                <div style="color: var(--color-fg);">github.com/Yasirrazaa</div>
+              </div>
+            </a>
+            
+            <a href={profile.linkedin} target="_blank" class="flex items-center gap-4 group">
+              <div class="w-12 h-12 border flex items-center justify-center" style="border-color: var(--color-border-strong);">
+                <i class="fa-brands fa-linkedin-in" style="color: var(--color-muted);"></i>
+              </div>
+              <div>
+                <div class="font-mono text-xs" style="color: var(--color-muted);">LINKEDIN</div>
+                <div style="color: var(--color-fg);">in/yasir-raza</div>
+              </div>
+            </a>
+
+            <a href={profile.kaggle} target="_blank" class="flex items-center gap-4 group">
+              <div class="w-12 h-12 border flex items-center justify-center" style="border-color: var(--color-border-strong);">
+                <i class="fa-brands fa-kaggle" style="color: var(--color-muted);"></i>
+              </div>
+              <div>
+                <div class="font-mono text-xs" style="color: var(--color-muted);">KAGGLE</div>
+                <div style="color: var(--color-fg);">kaggle.com/yasirabdaali</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Form -->
+        <div class="md:col-span-6 md:col-start-7 reveal">
+          <form netlify name="contact" method="POST" data-netlify="true" class="space-y-8">
+            <input type="hidden" name="form-name" value="contact" />
+
+            <div>
+              <label class="font-mono text-xs tracking-wider block mb-2" style="color: var(--color-muted);">YOUR NAME *</label>
+              <input type="text" name="name" required class="w-full py-3.5 px-0" style="background: transparent; border: none; border-bottom: 1px solid var(--color-border-strong); color: var(--color-fg); font-family: inherit; font-size: 1rem;" placeholder="Jane Doe" />
+            </div>
+
+            <div>
+              <label class="font-mono text-xs tracking-wider block mb-2" style="color: var(--color-muted);">EMAIL ADDRESS *</label>
+              <input type="email" name="email" required class="w-full py-3.5 px-0" style="background: transparent; border: none; border-bottom: 1px solid var(--color-border-strong); color: var(--color-fg); font-family: inherit; font-size: 1rem;" placeholder="jane@company.com" />
+            </div>
+
+            <div>
+              <label class="font-mono text-xs tracking-wider block mb-2" style="color: var(--color-muted);">PROJECT TYPE</label>
+              <select name="project-type" class="w-full py-3.5 px-0" style="background: transparent; border: none; border-bottom: 1px solid var(--color-border-strong); color: var(--color-fg); font-family: inherit; font-size: 1rem;">
+                <option value="" disabled selected class="bg-[#0a0908]">Select an engagement...</option>
+                <option value="strategy" class="bg-[#0a0908]">AI Strategy Call (90 min)</option>
+                <option value="build" class="bg-[#0a0908]">End-to-End AI Build</option>
+                <option value="retainer" class="bg-[#0a0908]">Fractional AI Engineer (Retainer)</option>
+                <option value="other" class="bg-[#0a0908]">Just exploring / Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="font-mono text-xs tracking-wider block mb-2" style="color: var(--color-muted);">PROJECT DETAILS *</label>
+              <textarea name="message" required rows="5" class="w-full py-3.5 px-0" style="background: transparent; border: none; border-bottom: 1px solid var(--color-border-strong); color: var(--color-fg); font-family: inherit; font-size: 1rem; resize: vertical;" placeholder="Tell me about your data, your goal, and your timeline..."></textarea>
+            </div>
+
+            <button type="submit" class="inline-flex items-center gap-2 px-8 py-4 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+              <span>Send Message</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

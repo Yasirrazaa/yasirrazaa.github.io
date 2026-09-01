@@ -1,0 +1,388 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { services, testimonials, faqs, stats, profile } from '../data/content';
+
+// Map service icons to FontAwesome classes
+const iconMap: Record<string, string> = {
+  'robot': 'fa-robot',
+  'microchip': 'fa-microchip',
+  'database': 'fa-database',
+  'microphone': 'fa-microphone',
+  'magnifying-glass': 'fa-magnifying-glass',
+  'server': 'fa-server',
+};
+---
+
+<BaseLayout
+  title="AI Engineering Services — Yasir Raza"
+  description="Custom AI agent development, LLM fine-tuning, RAG pipelines, voice agents, and MLOps. From prototype to production. Book a free consultation."
+  canonical="https://yasirrazaa.github.io/services"
+>
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center pt-32 pb-20 px-6 md:px-12" style="z-index: 3;">
+    <div class="glow-amber" style="top: 10%; right: -10%;"></div>
+    <div class="glow-cyan" style="bottom: 5%; left: -5%;"></div>
+    
+    <div class="max-w-7xl mx-auto w-full relative text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 font-mono text-xs" style="border: 1px solid var(--color-accent-2); color: var(--color-accent-2);">
+        <span class="status-dot"></span> Available for new projects
+      </div>
+      
+      <h1 class="font-display text-[14vw] md:text-[9vw] leading-[0.9] tracking-tight mb-8">
+        <span class="block">Stop prototyping.</span>
+        <span class="block">Start <span style="color: var(--color-accent); font-style: italic;">shipping</span></span>
+        <span class="block">AI that works.</span>
+      </h1>
+      
+      <p class="text-lg md:text-xl max-w-3xl mx-auto mb-12" style="color: var(--color-muted);">
+        I help startups and businesses build, fine-tune, and deploy production-grade LLM agents, RAG pipelines, voice interfaces, and multimodal systems — from ambiguous prototype to measurable ROI.
+      </p>
+      
+      <div class="flex flex-wrap gap-4 justify-center mb-16">
+        <a href="#services-list" class="inline-flex items-center gap-2 px-8 py-4 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+          <span>Explore Services</span>
+          <i class="fa-solid fa-arrow-down"></i>
+        </a>
+        <a href="/contact" class="inline-flex items-center gap-2 px-8 py-4 font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg);">
+          <span>Book a Free Call</span>
+          <i class="fa-regular fa-calendar"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto reveal">
+        {stats.map((stat) => (
+          <div class="p-6" style="background: var(--color-card); border: 1px solid var(--color-border);">
+            <div class="font-display text-3xl md:text-4xl" style="color: var(--color-accent);">{stat.value}</div>
+            <div class="font-mono text-xs mt-2 tracking-wider" style="color: var(--color-muted);">{stat.label.toUpperCase()}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem / Solution - Inspired by Spiralscout's problem-driven approach -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-12 gap-12">
+        <div class="md:col-span-5 reveal">
+          <div class="section-label mb-6">01 / The Gap</div>
+          <h2 class="font-display text-5xl md:text-6xl leading-tight mb-8">
+            Everyone has an AI idea. Few have systems that <span style="color: var(--color-accent); font-style: italic;">actually work</span>.
+          </h2>
+          <p class="text-lg leading-relaxed mb-8" style="color: var(--color-muted);">
+            Building a flashy demo is easy. Building an LLM system that handles edge cases, retrieves data accurately, doesn't hallucinate, and runs efficiently in production? That's where 90% of projects fail.
+          </p>
+          <!-- Trust signal: stats row -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4" style="background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px;">
+              <div class="font-display text-2xl" style="color: var(--color-accent);">10.7K+</div>
+              <div class="font-mono text-[10px] mt-1" style="color: var(--color-muted);">PYPI DOWNLOADS</div>
+            </div>
+            <div class="p-4" style="background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px;">
+              <div class="font-display text-2xl" style="color: var(--color-accent);">7,275</div>
+              <div class="font-mono text-[10px] mt-1" style="color: var(--color-muted);">TESTS WRITTEN</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="md:col-span-6 md:col-start-7 reveal">
+          <div class="space-y-8">
+            <div class="flex gap-6 p-6" style="background: var(--color-card); border-left: 3px solid #ef4444; border-radius: 0 8px 8px 0;">
+              <div>
+                <h3 class="text-xl font-medium mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 1rem;"></i>
+                  The "Prototyping Trap"
+                </h3>
+                <p style="color: var(--color-muted);" class="leading-relaxed text-sm">Your team built a LangChain demo, but it falls apart with real users. Latency spikes, retrieval is irrelevant, costs eat margins. <strong style="color: var(--color-fg);">You have a demo, not a product.</strong></p>
+              </div>
+            </div>
+            <div class="flex gap-6 p-6" style="background: var(--color-card); border-left: 3px solid #ef4444; border-radius: 0 8px 8px 0;">
+              <div>
+                <h3 class="text-xl font-medium mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 1rem;"></i>
+                  The Data Bottleneck
+                </h3>
+                <p style="color: var(--color-muted);" class="leading-relaxed text-sm">Terabytes of messy data, no clean pipeline. Human-in-the-loop labeling is eating your timeline. <strong style="color: var(--color-fg);">Your data is a liability, not an asset.</strong></p>
+              </div>
+            </div>
+            <div class="flex gap-6 p-6" style="background: var(--color-card); border-left: 3px solid var(--color-accent-2); border-radius: 0 8px 8px 0;">
+              <div>
+                <h3 class="text-xl font-medium mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-circle-check" style="color: var(--color-accent-2); font-size: 1rem;"></i>
+                  Production-Ready Engineering
+                </h3>
+                <p style="color: var(--color-accent-soft);" class="leading-relaxed text-sm">I bridge the gap between prototype and product. Structured agent architectures (LangGraph), efficient fine-tuning (Unsloth/QLoRA), proper deployment (Docker/CI/CD). <strong style="color: var(--color-accent);">Your prototype becomes a dependable system.</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section id="services-list" class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="section-label justify-center mb-6 inline-flex">02 / Services</div>
+        <h2 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+          How I can <span style="color: var(--color-accent); font-style: italic;">help you</span>.
+        </h2>
+        <p class="max-w-2xl mx-auto text-lg" style="color: var(--color-muted);">
+          Specialized AI engineering services designed to take your product from idea to deployment, optimized for cost, speed, and accuracy.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service, i) => (
+          <div class="reveal p-8" style={`background: var(--color-card); border: 1px solid ${service.popular ? 'var(--color-accent)' : 'var(--color-border)'}; transition-delay: ${i * 0.1}s;`}>
+            <div class="w-12 h-12 border flex items-center justify-center mb-6" style="border-color: var(--color-border-strong);">
+              <i class={`fa-solid ${iconMap[service.icon] || 'fa-gear'}`} style="color: var(--color-accent);"></i>
+            </div>
+            <h3 class="text-xl font-medium mb-2">{service.title}</h3>
+            <p class="font-mono text-xs mb-4" style="color: var(--color-muted);">{service.subtitle}</p>
+            <p style="color: var(--color-muted);" class="leading-relaxed text-sm mb-6">{service.description}</p>
+            <ul class="space-y-2 mb-6">
+              {service.features.slice(0, 4).map(f => (
+                <li class="flex items-start gap-2 text-sm" style="color: var(--color-fg);">
+                  <i class="fa-solid fa-check text-xs mt-1" style="color: var(--color-accent-2);"></i>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="font-mono text-sm mb-6" style="color: var(--color-accent);">{service.pricing}</p>
+            <a href="/contact" class="inline-flex items-center gap-2 text-sm font-medium" style="color: var(--color-accent);">
+              Get Started <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies Preview -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="section-label justify-center mb-6 inline-flex">03 / Case Studies</div>
+        <h2 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+          Proof of <span style="color: var(--color-accent); font-style: italic;">work</span>.
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="https://github.com/Yasirrazaa" target="_blank" class="reveal p-8 md:p-10 group block" style="background: var(--color-card); border: 1px solid var(--color-border);">
+          <div class="flex items-start justify-between mb-6">
+            <div class="font-mono text-xs tracking-wider" style="color: var(--color-muted);">001 / OPEN SOURCE</div>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--color-muted);"></i>
+          </div>
+          <h3 class="font-display text-3xl md:text-4xl mb-4 leading-tight">NotebookLLM MCP Server</h3>
+          <p class="text-base leading-relaxed mb-6" style="color: var(--color-muted);">Published production-ready MCP server enabling LLMs to efficiently interact with Jupyter Notebooks. Over 5,700+ downloads on PyPI, streamlining AI-to-environment workflows.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag">Python</span>
+            <span class="tag">PyPI</span>
+            <span class="tag">MCP Protocol</span>
+            <span class="tag">LLM Tooling</span>
+          </div>
+        </a>
+        
+        <a href="https://github.com/Yasirrazaa" target="_blank" class="reveal p-8 md:p-10 group block" style="background: var(--color-card); border: 1px solid var(--color-border);">
+          <div class="flex items-start justify-between mb-6">
+            <div class="font-mono text-xs tracking-wider" style="color: var(--color-muted);">002 / VOICE AGENT</div>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--color-muted);"></i>
+          </div>
+          <h3 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Telegram Voice Agent</h3>
+          <p class="text-base leading-relaxed mb-6" style="color: var(--color-muted);">Multimodal Telegram agent with cloned voice. Accepts text, voice, and image inputs, returning audio in a cloned voice with persona-aligned responses grounded in personal knowledge base.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag">LangGraph</span>
+            <span class="tag">Gemini</span>
+            <span class="tag">ElevenLabs</span>
+            <span class="tag">Chroma</span>
+          </div>
+        </a>
+        
+        <a href="https://github.com/Yasirrazaa" target="_blank" class="reveal p-8 md:p-10 group block" style="background: var(--color-card); border: 1px solid var(--color-border);">
+          <div class="flex items-start justify-between mb-6">
+            <div class="font-mono text-xs tracking-wider" style="color: var(--color-muted);">003 / FINE-TUNING</div>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--color-muted);"></i>
+          </div>
+          <h3 class="font-display text-3xl md:text-4xl mb-4 leading-tight">LaTeX → Python Compiler</h3>
+          <p class="text-base leading-relaxed mb-6" style="color: var(--color-muted);">Fine-tuned NuminaMath-7B to generate executable Python code directly from LaTeX mathematical notation using Unsloth and QLoRA.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag">Unsloth</span>
+            <span class="tag">QLoRA</span>
+            <span class="tag">NuminaMath</span>
+            <span class="tag">SymPy</span>
+          </div>
+        </a>
+        
+        <a href="/blog" class="reveal p-8 md:p-10 group block" style="background: var(--color-card); border: 1px solid var(--color-border);">
+          <div class="flex items-start justify-between mb-6">
+            <div class="font-mono text-xs tracking-wider" style="color: var(--color-muted);">004 / RAG PIPELINE</div>
+            <i class="fa-solid fa-arrow-right" style="color: var(--color-muted);"></i>
+          </div>
+          <h3 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Data Pipeline & Verification</h3>
+          <p class="text-base leading-relaxed mb-6" style="color: var(--color-muted);">Scraped and verified thousands of AI tools from public directories for Teamlift's Teamo recommendation engine — HTTP status checks, screenshot capture, and freshness validation, with deduplication at scale. Built time-series forecasting on job-posting skill demand from dice.com.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="tag">Python</span>
+            <span class="tag">NER</span>
+            <span class="tag">Human-in-Loop</span>
+            <span class="tag">FastAPI</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process - Inspired by Qubika's outcome-oriented framing -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="section-label justify-center mb-6 inline-flex">04 / How It Works</div>
+        <h2 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+          From idea to deployed system <span style="color: var(--color-accent); font-style: italic;">in weeks</span>.
+        </h2>
+        <p class="max-w-2xl mx-auto text-lg" style="color: var(--color-muted);">
+          No black boxes. No endless consulting. Every engagement follows a proven 4-phase cycle.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-0 relative">
+        <!-- Connector line (desktop) -->
+        <div class="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px" style="background: linear-gradient(90deg, var(--color-accent), var(--color-border), var(--color-accent), var(--color-border));"></div>
+
+        {[
+          { step: "01", title: "Discovery", desc: "We map your business problem, identify data sources, and define success metrics. You get a clear technical roadmap.", icon: "fa-solid fa-compass" },
+          { step: "02", title: "Architect", desc: "I design the system architecture — model selection, agent graph design, RAG strategy, and deployment stack.", icon: "fa-solid fa-sitemap" },
+          { step: "03", title: "Build & Tune", desc: "Rapid prototyping with weekly demos. Fine-tuning, pipeline building, and continuous testing against your metrics.", icon: "fa-solid fa-code" },
+          { step: "04", title: "Deploy & Scale", desc: "Dockerized deployment, CI/CD, monitoring setup, and full handoff documentation. Your system stays reliable.", icon: "fa-solid fa-rocket" },
+        ].map((step, i) => (
+          <div class="reveal p-6 md:p-8 text-center relative" style={`transition-delay: ${i * 0.1}s;`}>
+            <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center" style="background: rgba(255, 107, 26, 0.1); border: 1px solid rgba(255, 107, 26, 0.2); border-radius: 50%;">
+              <i class={`${step.icon}`} style="color: var(--color-accent); font-size: 1.25rem;"></i>
+            </div>
+            <div class="font-mono text-xs mb-3" style="color: var(--color-accent);">STEP {step.step}</div>
+            <h3 class="font-display text-2xl mb-3">{step.title}</h3>
+            <p style="color: var(--color-muted);" class="text-sm leading-relaxed max-w-xs mx-auto">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Quantified outcome teaser -->
+      <div class="mt-16 text-center reveal">
+        <p class="text-sm" style="color: var(--color-muted);">
+          Typical timeline: <strong style="color: var(--color-fg);">2–4 weeks for an MVP</strong> · 
+          <strong style="color: var(--color-fg);">4–8 weeks for a production system</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing / Engagement Tiers -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="section-label justify-center mb-6 inline-flex">05 / Engagements</div>
+        <h2 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+          Ways we can <span style="color: var(--color-accent); font-style: italic;">work together</span>.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="reveal p-8 flex flex-col" style="background: var(--color-card); border: 1px solid var(--color-border);">
+          <div class="font-mono text-xs mb-2" style="color: var(--color-muted);">STARTER</div>
+          <h3 class="font-display text-3xl mb-4">AI Strategy Call</h3>
+          <p style="color: var(--color-muted);" class="mb-8 flex-1 leading-relaxed">90-minute deep dive into your idea. We map architecture, tech stack, and feasibility. You leave with a clear technical roadmap.</p>
+          <a href="/contact" class="w-full py-3 text-center font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg); display: block;">Book Session</a>
+        </div>
+        
+        <div class="reveal p-8 flex flex-col" style="background: linear-gradient(135deg, rgba(255, 107, 26, 0.05) 0%, transparent 100%); border: 1px solid var(--color-accent); position: relative;">
+          <div style="position: absolute; top: 0; right: 0; background: var(--color-accent); color: var(--color-bg); font-size: 0.65rem; font-family: var(--font-mono); padding: 0.25rem 0.75rem;">POPULAR</div>
+          <div class="font-mono text-xs mb-2" style="color: var(--color-accent);">CORE OFFER</div>
+          <h3 class="font-display text-3xl mb-4">End-to-End Build</h3>
+          <p style="color: var(--color-muted);" class="mb-8 flex-1 leading-relaxed">From architecture to deployment. I build your custom LLM agent, RAG pipeline, or fine-tuned model. Includes Docker deployment and CI/CD.</p>
+          <a href="/contact" class="w-full py-3 text-center font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent); display: block;">Start Project</a>
+        </div>
+        
+        <div class="reveal p-8 flex flex-col" style="background: var(--color-card); border: 1px solid var(--color-border);">
+          <div class="font-mono text-xs mb-2" style="color: var(--color-muted);">RETAINER</div>
+          <h3 class="font-display text-3xl mb-4">Fractional AI Engineer</h3>
+          <p style="color: var(--color-muted);" class="mb-8 flex-1 leading-relaxed">Ongoing development, iteration, and MLOps support. Perfect for startups needing senior AI expertise without the full-time overhead.</p>
+          <a href="/contact" class="w-full py-3 text-center font-medium" style="border: 1px solid var(--color-border-strong); color: var(--color-fg); display: block;">Check Availability</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="section-label justify-center mb-6 inline-flex">06 / Testimonials</div>
+        <h2 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+          What clients <span style="color: var(--color-accent); font-style: italic;">say</span>.
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        {testimonials.map((t) => (
+          <div class="reveal p-8" style="background: var(--color-card); border: 1px solid var(--color-border);">
+            <div style="color: var(--color-accent); font-size: 3rem; font-family: var(--font-display); line-height: 1; margin-bottom: 1rem;">"</div>
+            <p style="color: var(--color-muted);" class="leading-relaxed mb-6 italic">{t.quote}</p>
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="font-medium">{t.author}</p>
+                <p class="text-sm" style="color: var(--color-muted-2);">{t.role}, {t.company}</p>
+              </div>
+              <span class="tag" style="color: var(--color-accent-2); border-color: var(--color-accent-2);">{t.metric}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="relative py-32 px-6 md:px-12" style="z-index: 3;">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <div class="section-label justify-center mb-6 inline-flex">07 / FAQ</div>
+        <h2 class="font-display text-5xl md:text-6xl leading-tight mb-6">
+          Frequently asked <span style="color: var(--color-accent); font-style: italic;">questions</span>.
+        </h2>
+      </div>
+      
+      <div class="reveal">
+        {faqs.map((faq) => (
+          <div style="border-bottom: 1px solid var(--color-border);">
+            <details class="py-6 group">
+              <summary class="flex items-center justify-between cursor-pointer text-lg font-medium" style="color: var(--color-fg);">
+                <span>{faq.question}</span>
+                <i class="fa-solid fa-chevron-down transition-transform duration-300 group-open:rotate-180" style="color: var(--color-accent);"></i>
+              </summary>
+              <p class="mt-4 leading-relaxed" style="color: var(--color-muted);">{faq.answer}</p>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="relative py-32 px-6 md:px-12 text-center" style="z-index: 3;">
+    <div class="glow-amber" style="top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.4;"></div>
+    <div class="max-w-4xl mx-auto reveal">
+      <h2 class="font-display text-5xl md:text-7xl leading-tight mb-6">
+        Ready to build your <span style="color: var(--color-accent); font-style: italic;">AI edge</span>?
+      </h2>
+      <p class="text-lg mb-4 max-w-2xl mx-auto" style="color: var(--color-muted);">
+        Book a free 30-minute consultation. We'll discuss your project, explore solutions, and I'll provide a detailed proposal — no obligation.
+      </p>
+      <p class="font-mono text-sm mb-10" style="color: var(--color-accent-2);">Limited to 3 new clients per month</p>
+      <a href="/contact" class="inline-flex items-center gap-2 px-10 py-5 font-medium" style="background: var(--color-accent); color: var(--color-bg); border: 1px solid var(--color-accent);">
+        <span>Book Free Consultation</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

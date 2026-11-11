@@ -200,7 +200,7 @@ export const certificates: CertificateItem[] = [
     title: "Claude Certified Developer – Foundations",
     issuer: "Anthropic",
     year: "2026",
-    href: "https://www.credly.com/badges/claude-certified-developer-foundations",
+    href: "https://www.credly.com/badges/e1626d6b-ec45-4509-8e37-d931495bacee/public_url",
     kind: "cert",
   },
   {

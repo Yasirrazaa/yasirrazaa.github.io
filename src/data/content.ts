@@ -54,7 +54,7 @@ export interface FAQ {
 export const profile = {
   name: "Yasir Raza",
   shortName: "YR",
-  role: "AI Engineer · LLM Training & Agents · MCP Tooling · Voice AI",
+  role: "Anthropic-Certified Claude Developer · AI Engineer · LLM Training & Agents · MCP Tooling · Voice AI",
   headline: "Building the systems layer between LLMs, voice, retrieval, and real deployment.",
   summary: "I build AI agents, LLM training and evaluation systems, and voice infrastructure that actually ship — from RL-trained math models and adversarial security frameworks to PyPI packages with 10K+ downloads and serverless GPU deployments.",
   location: "Islamabad, Pakistan",
@@ -178,6 +178,9 @@ export const experience: Experience[] = [
 
 export const credentials: Credential[] = [
   { title: "B.Sc. Software Engineering", issuer: "NUML, Islamabad", year: "Aug 2026" },
+  { title: "Claude Certified Developer – Foundations", issuer: "Anthropic", year: "2026" },
+  { title: "Aspire Leaders Program — Cohort 4 2026", issuer: "Aspire Institute (founded at Harvard)", year: "2026 (in progress)" },
+  { title: "McKinsey.org Forward Program — Core Skills", issuer: "McKinsey.org", year: "2026 (in progress)" },
   { title: "Advanced LLM Bootcamp", issuer: "NUST & Sky Electric", year: "2024" },
   { title: "Generative AI · Responsible AI · LLMs", issuer: "Google", year: "2024" },
   { title: "Data Scientist Track · Kaggle 2× Expert (Datasets · Notebooks)", issuer: "DataCamp · Kaggle", year: "Ongoing" },
@@ -193,6 +196,13 @@ export interface CertificateItem {
 }
 
 export const certificates: CertificateItem[] = [
+  {
+    title: "Claude Certified Developer – Foundations",
+    issuer: "Anthropic",
+    year: "2026",
+    href: "https://www.credly.com/badges/claude-certified-developer-foundations",
+    kind: "cert",
+  },
   {
     title: "Associate Data Scientist in Python",
     issuer: "DataCamp — Career Track",
